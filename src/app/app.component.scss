@@ -18,10 +18,14 @@
 
         }
     }
+}
 
-    .kenar {
-        border-style: solid;
-        border-color: #f44336;
-        border-width: 5px;
-    }
+.footer { 
+    background-color: #f44336;
+    color: white;
+    height: 60px;
+    line-height: 60px;
+    font-size: 17px;
+    box-shadow: 2px -3px 10px #9b9b9b;
+
 }
