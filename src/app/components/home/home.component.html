@@ -1,0 +1,139 @@
+<div class="page home">
+  <div class="container">
+    <div class="row align-items-center mt-4">
+      <!--Todo List-->
+      <div class="col-md-6">
+        <h2 class="page-title">
+          <img src="assets/svg/checklist.svg" class="svg" />
+          <span>Todo List</span>
+        </h2>
+      </div>
+      <!--Add new item-->
+      <div class="col-md-6 text-center">
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Add new item" #newTodo />
+          </mat-form-field>
+          <button
+            type="submit"
+            class=""
+            mat-raised-button
+            color="warn"
+            (click)="addTodo(newTodo)"
+          >
+            Add
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <mat-card class="col-12 shadow-lg p-md-5">
+        <div class="row">
+          <!--Daily-->
+          <div class="col-md-4">
+            <h2 class="text-warning">Daily Todo</h2>
+            <div
+              cdkDropList
+              #pendingList="cdkDropList"
+              [cdkDropListData]="data.day"
+              [cdkDropListConnectedTo]="[progressList, yearList, weakList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)"
+            >
+              <div class="example-box" *ngFor="let item of data.day" cdkDrag>
+                <img class="icon" src="assets/svg/clock.svg" />
+                {{ item }}
+              </div>
+            </div>
+          </div>
+          <!--Weekly-->
+          <div class="col-md-4 m-md-0 mt-3">
+            <h2 class="text-warning">Weekly Todo</h2>
+            <div
+              cdkDropList
+              #weakList="cdkDropList"
+              [cdkDropListData]="data.weak"
+              [cdkDropListConnectedTo]="[progressList, yearList, pendingList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)"
+            >
+              <div class="example-box" *ngFor="let item of data.weak" cdkDrag>
+                <img class="icon" src="assets/svg/clock.svg" />
+                {{ item }}
+              </div>
+            </div>
+          </div>
+          <!--Monthly-->
+          <div class="col-md-4 m-md-0 mt-3">
+            <h2 class="text-warning">Monthly Todo</h2>
+            <div
+              cdkDropList
+              #yearList="cdkDropList"
+              [cdkDropListData]="data.month"
+              [cdkDropListConnectedTo]="[progressList, pendingList, weakList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)"
+            >
+              <div class="example-box" *ngFor="let item of data.month" cdkDrag>
+                <img class="icon" src="assets/svg/clock.svg" />
+                {{ item }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="col-12 shadow-lg mt-4 p-md-5">
+        <div class="row">
+          <!--Doing-->
+          <div class="col-md-6">
+            <h2 class="text-warning">Doing</h2>
+            <div
+              cdkDropList
+              #progressList="cdkDropList"
+              [cdkDropListData]="data.inProgress"
+              [cdkDropListConnectedTo]="[
+                pendingList,
+                doneList,
+                weakList,
+                yearList
+              ]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)"
+            >
+              <div
+                class="example-box"
+                *ngFor="let item of data.inProgress"
+                cdkDrag
+              >
+                <img class="icon" src="assets/svg/hourglass.svg" />
+                {{ item }}
+              </div>
+            </div>
+          </div>
+          <!--Done-->
+          <div class="col-md-6 m-md-0 mt-3">
+            <h2 class="text-warning">Done</h2>
+            <div
+              cdkDropList
+              #doneList="cdkDropList"
+              [cdkDropListData]="data.done"
+              [cdkDropListConnectedTo]="[progressList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)"
+            >
+              <div class="example-box" *ngFor="let item of data.done" cdkDrag>
+                <img class="icon" src="assets/svg/like.svg" />
+                {{ item }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center mt-5">
+        <small>Copyright 2020 Mine EREL</small>
+      </div>
+    </div>
+  </div>
+</div>
